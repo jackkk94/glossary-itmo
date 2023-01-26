@@ -25,8 +25,38 @@
   },
   {
     "id": 5,
-    "title": "Заголовок5",
-    "description": "Описание5",
-    "url": "http://href5.com"
+    "title": "Реактивное программирование",
+    "description": "программирование с асинхронными потоками данных. Реактивный подход повышает уровень абстракции, что позволяет сконцентрироваться на взаимосвязи событий, которые определяют бизнес-логику, вместо того, чтобы постоянно поддерживать код с большим количеством деталей реализации",
+    "url": "https://cyberleninka.ru/article/n/realizatsiya-veb-servisa-s-primeneniem-paradigmy-reaktivnogo-programmirovaniya"
+  },
+  {
+    "id": 6,
+    "title": "Действие",
+    "description": "Хелпер, упрощающий передачу данных диспетчеру",
+    "url": "https://cyberleninka.ru/article/n/overview-flux-architecture-on-the-example-of-state-storage-of-java-script-application-redux"
+  },
+  {
+    "id": 7,
+    "title": "Диспетчер",
+    "description": "Функция, принимающая действия и рассылающая нагрузку зарегистрированным обработчикам",
+    "url": "https://cyberleninka.ru/article/n/overview-flux-architecture-on-the-example-of-state-storage-of-java-script-application-redux"
+  }
+  {
+    "id": 8,
+    "title": "Хранилище данных",
+    "description": "Контейнер для состояния приложения и бизнес-логики в обработчиках, зарегистрированных в диспетчере",
+    "url": "https://cyberleninka.ru/article/n/overview-flux-architecture-on-the-example-of-state-storage-of-java-script-application-redux"
+  }
+  {
+    "id": 9,
+    "title": "Представление",
+    "description": "Компонент, который обычно отвечает за отображение данных, конечная точка потоков данных",
+    "url": "https://cyberleninka.ru/article/n/overview-flux-architecture-on-the-example-of-state-storage-of-java-script-application-redux"
+  }
+  {
+    "id": 10,
+    "title": "",
+    "description": "",
+    "url": ""
   }
 ]
