@@ -1,0 +1,16 @@
+$bg-violet: #712cf9;
+
+.btn{
+    background-color: $bg-violet;
+    color: white;
+}
+
+.card-title{
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+:host{
+    display: block;
+}

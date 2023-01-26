@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  backend:
+    build: backend
+    volumes:
+      - ./backend:/backend
+    ports:
+      - 3000:3000
+
+  frontend:
+    build: client
+    depends_on:
+      - backend
+    ports:
+      - 80:4200

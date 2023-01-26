@@ -1,0 +1,7 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title" (click)="goToItemPage()">{{item.title}}</h5>
+    <p class="card-text">{{item.description}}</p>
+    <a *ngIf="item.url" target="_blank" [href]="item.url" class="btn">Перейти к источнику</a>
+  </div>
+</div>

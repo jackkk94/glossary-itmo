@@ -1,0 +1,52 @@
+:host{
+    display: block;
+}
+$bg-violet: #712cf9;
+.logo-name{
+    color: white;
+    display: flex;
+    align-items: center;
+    .icon{
+        margin-right: 8px;
+        width: 30px;
+        height: 30px;
+        .path{
+            fill: white;
+        }
+    }
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.navbar {
+    background-color: $bg-violet;
+}
+
+.btn{
+    background-color: $bg-violet;
+    color: white;
+}
+
+.back-icon{
+    width: 30px;
+    height: 30px;
+    margin-right: 16px;
+    path{
+        fill: white;
+    }
+}
+
+.title{
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.description{
+    font-size: 20px;
+}
+
+.url{
+    font-size: 16px;
+}

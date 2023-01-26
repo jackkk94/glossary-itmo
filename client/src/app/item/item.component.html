@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark">
+  <div class="container">
+    <h2 class="logo-name" (click)="back()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+      </svg>
+      
+      Вернуться к списку</h2>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+      aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="container pt-2">
+  <div *ngIf="data; else noData">
+    <div class="title">{{data.title}}</div>
+    <div class="description mr-8">{{data.description}}</div>
+    <div *ngIf="data.url" class="mr-4 url">
+      Ссылка на источник:   <a  target="_blank" [href]="data.url" >{{data.url}}</a> </div>
+  </div>
+
+  <ng-template #noData>Ничего не найдено</ng-template>
+</div>

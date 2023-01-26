@@ -1,0 +1,28 @@
+:host{
+    display: block;
+}
+
+$bg-violet: #712cf9;
+
+.search{
+    width: 25%;
+    margin-left: 16px;
+}
+
+.logo-name{
+    color: white;
+    display: flex;
+    align-items: center;
+    .icon{
+        margin-right: 8px;
+        width: 30px;
+        height: 30px;
+        .path{
+            fill: white;
+        }
+    }
+}
+
+.navbar {
+    background-color: $bg-violet;
+}

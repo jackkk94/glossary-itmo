@@ -1,0 +1,6 @@
+{
+    "/list": {
+        "target": "http://backend:3000",
+        "secure": false
+      }
+}
