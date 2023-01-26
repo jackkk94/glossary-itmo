@@ -20,17 +20,17 @@ const loadFile = (file, callback) => {
 const main = async () => {
   let list = [];
 
-  loadFile('./list.json', (data, err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
+  // loadFile('./list.json', (data, err) => {
+  //   if (err) {
+  //     console.log(err);
+  //     return;
+  //   }
 
-    list = data ?? [];
-  });
+  //   list = data ?? [];
+  // });
 
   app.get('/list', async (request, response) => {
-    response.send(list);
+    response.send([{id:1, title: '1', description:'1212'}]);
   });
 
   app.get('/list/:id', async (request, response) => {
@@ -43,7 +43,7 @@ const main = async () => {
     const item = list.find((z) => z.id === id);
     response.send(item);
   });
-  app.listen(3000, '51.250.31.225');
+  app.listen(3000);
 };
 
 main();
