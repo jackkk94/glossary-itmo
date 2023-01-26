@@ -1,6 +1,3 @@
-# Проектирование информационных систем
-## Задание 7. Использование Docker с БД
-
 ## Docker установка
 https://docs.docker.com/get-docker/
 
@@ -22,5 +19,3 @@ https://nodejs.org/en/download/
 - Запуск проекта
 
 `$ docker-compose up`
-
-- Приложение запустится по адресу localhost:3000
