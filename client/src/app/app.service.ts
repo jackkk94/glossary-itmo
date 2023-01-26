@@ -8,7 +8,7 @@ import { Item } from './app.component';
   providedIn: 'root',
 })
 export class ApiService {
-  public apiUrl = '/list';
+  public apiUrl = 'http://0.0.0.0:3000/list';
   constructor(private http: HttpClient) {}
 
   public getList(): Observable<any> {
