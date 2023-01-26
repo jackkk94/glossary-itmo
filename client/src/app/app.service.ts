@@ -16,6 +16,6 @@ export class ApiService {
   }
 
   public getById(id: number): Observable<any> {
-    return this.http.get<Item>(`${this.apiUrl}/id`);
+    return this.http.get<Item>(`${this.apiUrl}/${id}`);
   }
 }
