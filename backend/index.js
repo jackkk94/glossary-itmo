@@ -43,7 +43,7 @@ const main = async () => {
     const item = list.find((z) => z.id === id);
     response.send(item);
   });
-  app.listen(3000, '0.0.0.0');
+  app.listen(3000, '51.250.31.225');
 };
 
 main();
