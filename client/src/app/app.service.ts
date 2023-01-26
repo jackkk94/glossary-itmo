@@ -8,7 +8,7 @@ import { Item } from './app.component';
   providedIn: 'root',
 })
 export class ApiService {
-  public apiUrl = 'http://51.250.31.225/:3000';
+  public apiUrl = 'http://51.250.31.225:3000';
   constructor(private http: HttpClient) {}
 
   public getList(): Observable<any> {
