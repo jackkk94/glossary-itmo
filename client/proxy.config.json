@@ -1,6 +1,7 @@
 {
     "/list": {
         "target": "http://backend:3000",
-        "secure": false
+        "secure": false,
+        "changeOrigin": true
       }
 }

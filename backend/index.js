@@ -43,7 +43,7 @@ const main = async () => {
     const item = list.find((z) => z.id === id);
     response.send(item);
   });
-  app.listen(3000);
+  app.listen(3000, '0.0.0.0');
 };
 
 main();
