@@ -8,14 +8,14 @@ import { Item } from './app.component';
   providedIn: 'root',
 })
 export class ApiService {
-  public apiUrl = 'http://0.0.0.0:3000/list';
+  public apiUrl = 'http://51.250.31.225/:3000';
   constructor(private http: HttpClient) {}
 
   public getList(): Observable<any> {
-    return this.http.get<Item[]>(`${this.apiUrl}`);
+    return this.http.get<Item[]>(`${this.apiUrl}/list`);
   }
 
   public getById(id: number): Observable<any> {
-    return this.http.get<Item>(`${this.apiUrl}/${id}`);
+    return this.http.get<Item>(`${this.apiUrl}/list/${id}`);
   }
 }
