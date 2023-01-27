@@ -1,8 +1,14 @@
 import Express from 'express';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import cors from 'cors';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const PORT = 3000;
 const app = Express();
+
 app.use(cors());
 
 const loadFile = (file, callback) => {
@@ -20,7 +26,7 @@ const loadFile = (file, callback) => {
 const main = async () => {
   let list = [];
 
-  loadFile('./list.json', (data, err) => {
+  loadFile('./assets/list.json', (data, err) => {
     if (err) {
       console.log(err);
       return;
@@ -33,6 +39,10 @@ const main = async () => {
     response.send(list);
   });
 
+  app.get('/mindmap', async (request, response) => {
+    response.sendFile(__dirname + '/assets/mindMap.png');
+  });
+
   app.get('/list/:id', async (request, response) => {
     const id = Number(request.params.id);
 
@@ -43,7 +53,7 @@ const main = async () => {
     const item = list.find((z) => z.id === id);
     response.send(item);
   });
-  app.listen(3000);
+  app.listen(PORT);
 };
 
 main();

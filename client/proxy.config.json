@@ -1,7 +1,12 @@
 {
-    "/list": {
-        "target": "http://backend:3000",
-        "secure": false,
-        "changeOrigin": true
-      }
+  "/list": {
+    "target": "http://backend:3000",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/mindmap": {
+    "target": "http://backend:3000",
+    "secure": false,
+    "changeOrigin": true
+  }
 }
