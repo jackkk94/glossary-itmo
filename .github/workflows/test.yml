@@ -7,6 +7,9 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./client/
     strategy:
           matrix:
             node-version: [14.x]
@@ -20,6 +23,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: install dependencies
-      run: |
-          cd client\
-          npm ci
+      run: npm ci
