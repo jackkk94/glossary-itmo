@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, of, Subscription, switchMap } from 'rxjs';
 import { Item } from '../app.component';
@@ -9,7 +9,7 @@ import { ApiService } from '../app.service';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent {
+export class ItemComponent implements OnDestroy{
   public data!: Item;
   private subscription = new Subscription();
   private id: number | undefined;

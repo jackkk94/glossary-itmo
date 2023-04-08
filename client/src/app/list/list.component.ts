@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, Subscription } from 'rxjs';
 import { Item } from '../app.component';
@@ -9,7 +9,7 @@ import { ApiService } from '../app.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
+export class ListComponent implements OnInit, OnDestroy{
   public $search = new FormControl();
   public result: Item[] = []
   private list: Item[] = [];

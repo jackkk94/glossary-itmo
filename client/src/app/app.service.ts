@@ -10,11 +10,11 @@ export class ApiService {
   public apiUrl = '/list';
   constructor(private http: HttpClient) {}
 
-  public getList(): Observable<any> {
+  public getList(): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.apiUrl}`);
   }
 
-  public getById(id: number): Observable<any> {
+  public getById(id: number): Observable<Item> {
     return this.http.get<Item>(`${this.apiUrl}/${id}`);
   }
 }
