@@ -28,6 +28,7 @@ export class ListComponent implements OnInit, OnDestroy{
     this.apiService.getList().subscribe((z) => {
       this.list = z;
       this.result = [...this.list]
+      console.log(z)
     });
   }
 
