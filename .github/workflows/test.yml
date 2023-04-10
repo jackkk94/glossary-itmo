@@ -3,6 +3,10 @@ name: ci/cd
 on:
   push:
     branches: ['master']
+env:
+  CR_REGISTRY: crpgdibs74khufptbu4j
+  IMAGE_TAG_FRONTEND: frontend
+
 
 jobs:
   Frontend:
@@ -73,5 +77,5 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         run: |
-          docker build -t cr.yandex/$CR_REGISTRY:$IMAGE_TAG_FRONTEND .
-          docker push cr.yandex/$CR_REGISTRY:$IMAGE_TAG_FRONTEND
+          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{IMAGE_TAG_FRONTEND}} .
+          docker push cr.yandex/${{env.CR_REGISTRY}}:${{IMAGE_TAG_FRONTEND}}
