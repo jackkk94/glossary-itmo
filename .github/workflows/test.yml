@@ -62,7 +62,7 @@ jobs:
 
 
   build:
-    needs: Frontend, Backend
+    needs: Frontend Backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
