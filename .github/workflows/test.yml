@@ -62,6 +62,9 @@ jobs:
   build:
     needs: [Backend]
     runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./client/
     steps:
       - uses: actions/checkout@v2
       - name: Yandex Cloud CR "Login"
@@ -70,5 +73,5 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         run: |
-          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
-          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+          docker build -t cr.yandex/$CR_REGISTRY:$IMAGE_TAG_FRONTEND .
+          docker push cr.yandex/$CR_REGISTRY:$IMAGE_TAG_FRONTEND
