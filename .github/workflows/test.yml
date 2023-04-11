@@ -7,7 +7,7 @@ env:
   CR_REGISTRY: crpgdibs74khufptbu4j
   IMAGE_TAG_FRONTEND: frontend
   IMAGE_TAG_BACKEND: backend
-
+  SSH_KEY: ${{ secrets.SSH_KEY }}
 
 jobs:
   update-yc:
@@ -31,4 +31,4 @@ jobs:
         vm-core-fraction: 5
         vm-subnet-id: 'e9bu7ur6f08ojuln8q4e'
         docker-compose-path: './docker-compose.yaml'
-  
+        user-data-path: './user-data.yaml'
