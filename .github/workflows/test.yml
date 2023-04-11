@@ -10,6 +10,27 @@ env:
 
 
 jobs:
+  update-yc:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Deploy COI VM
+      id: deploy-coi
+      uses: yc-actions/yc-coi-deploy@v1.0.1
+      with:
+        yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        folder-id: ${{ secrets.YC_FOLDER_ID }}
+        VM-name: ${{ secrets.YC_VM_NAME }}
+        vm-service-account-id: 'ajecfmbl274lqps11jkg'
+        vm-cores: 2
+        vm-platform-id: 'standard-v2'
+        vm-memory: 512Mb
+        vm-disk-size: 30Gb
+        vm-core-fraction: 5
+        vm-subnet-id: 'e9bu7ur6f08ojuln8q4e'
+        docker-compose-path: './docker-compose.yaml'
   # Frontend:
   #   runs-on: ubuntu-latest
   #   defaults:
@@ -36,7 +57,7 @@ jobs:
   #     run: npm run lint
   #   - name: run test
   #     run: npm run test:prod
-
+s
   # Backend:
   #   runs-on: ubuntu-latest
   #   defaults:
@@ -64,28 +85,23 @@ jobs:
 
 
   # build:
-  #   needs: [Backend]
-  #   runs-on: ubuntu-latest
+    needs: [Backend]
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Yandex Cloud CR "Login"
-  #       uses: yc-actions/yc-cr-login@v0.1-alpha
-  #       with:
-  #         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-  #     - name: Build, tag, and push backend image to Yandex Cloud Container Registry
-  #       working-directory: ./backend/
-  #       run: |
-  #         docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}} .
-  #         docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Yandex Cloud CR "Login"
+        uses: yc-actions/yc-cr-login@v0.1-alpha
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+      - name: Build, tag, and push backend image to Yandex Cloud Container Registry
+        working-directory: ./backend/
+        run: |
+          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}} .
+          docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
 
-  #     - name: Build, tag, and push frontend image to Yandex Cloud Container Registry
-  #       working-directory: ./client/
-  #       run: |
-  #         docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}} .
-  #         docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
-  update-yc:
-    - name: Deploy COI VM
-      uses: yc-actions/yc-coi-deploy@v1.0.1
-      with:
-        docker-compose-path: './docker-compose.yaml'
+      - name: Build, tag, and push frontend image to Yandex Cloud Container Registry
+        working-directory: ./client/
+        run: |
+          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}} .
+          docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
