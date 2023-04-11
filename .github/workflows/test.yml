@@ -62,7 +62,7 @@ jobs:
       run: npm run test 
 
   Build:
-    needs: [Backend]
+    needs: [Backend, Frontend]
     runs-on: ubuntu-latest
 
     steps:
