@@ -23,7 +23,7 @@ jobs:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         folder-id: ${{ secrets.YC_FOLDER_ID }}
         VM-name: ${{ secrets.YC_VM_NAME }}
-        vm-service-account-id: 'ajecfmbl274lqps11jkg'
+        vm-service-account-id: 'ajeaorne25djejr6ile9'
         vm-cores: 2
         vm-platform-id: 'standard-v2'
         vm-memory: 512Mb
@@ -31,77 +31,3 @@ jobs:
         vm-core-fraction: 5
         vm-subnet-id: 'e9bu7ur6f08ojuln8q4e'
         docker-compose-path: './docker-compose.yaml'
-  # Frontend:
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #      run:
-  #        working-directory: ./client/
-  #   strategy:
-  #         matrix:
-  #           node-version: [16.x]
-
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Use Node.js ${{ matrix.node-version }}
-
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: ${{ matrix.node-version }}
-  #       cache: 'npm'
-  #       cache-dependency-path: './client/package-lock.json'
-  #   - name: install dependencies
-  #     run: npm ci
-  #   - name: install dependencies
-  #     run: npm ci
-  #   - name: run lint
-  #     run: npm run lint
-  #   - name: run test
-  #     run: npm run test:prod
-
-  # Backend:
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #      run:
-  #        working-directory: ./backend/
-  #   strategy:
-  #         matrix:
-  #           node-version: [16.x]
-
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Use Node.js ${{ matrix.node-version }}
-
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: ${{ matrix.node-version }}
-  #       cache: 'npm'
-  #       cache-dependency-path: './backend/package-lock.json'
-  #   - name: install dependencies
-  #     run: npm ci
-  #   - name: run lint
-  #     run: npm run lint
-  #   - name: run test
-  #     run: npm run test 
-
-
-  # build:
-    needs: [Backend]
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Yandex Cloud CR "Login"
-        uses: yc-actions/yc-cr-login@v0.1-alpha
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-      - name: Build, tag, and push backend image to Yandex Cloud Container Registry
-        working-directory: ./backend/
-        run: |
-          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}} .
-          docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
-
-      - name: Build, tag, and push frontend image to Yandex Cloud Container Registry
-        working-directory: ./client/
-        run: |
-          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}} .
-          docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
