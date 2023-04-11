@@ -22,13 +22,13 @@ jobs:
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         folder-id: 'b1g9u079h6hri0udbrmt'
-        VM-name: 'tested'
+        VM-name: 'glossary-new'
         vm-service-account-id: 'ajeaorne25djejr6ile9'
         vm-cores: 2
         vm-platform-id: 'standard-v2'
-        vm-memory: 512Mb
+        vm-memory: 2Gb
         vm-disk-size: 30Gb
-        vm-core-fraction: 5
+        vm-core-fraction: 100
         vm-subnet-id: 'e9bu7ur6f08ojuln8q4e'
         docker-compose-path: './docker-compose.yaml'
         user-data-path: './user-data.yaml'
