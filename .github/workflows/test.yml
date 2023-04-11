@@ -29,7 +29,7 @@ jobs:
         vm-memory: 512Mb
         vm-disk-size: 30Gb
         vm-core-fraction: 5
-        YC_VM_SSH: '~/.ssh/id_rsa.pub'
+        ssh-key: '~/.ssh/id_rsa.pub'
         vm-subnet-id: 'e9bu7ur6f08ojuln8q4e'
         docker-compose-path: './docker-compose.yaml'
         user-data-path: './user-data.yaml'
