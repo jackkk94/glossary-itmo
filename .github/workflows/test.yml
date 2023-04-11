@@ -21,8 +21,8 @@ jobs:
       uses: yc-actions/yc-coi-deploy@v1.0.1
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-        folder-id: ${{ secrets.YC_FOLDER_ID }}
-        VM-name: ${{ secrets.YC_VM_NAME }}
+        folder-id: 'b1g9u079h6hri0udbrmt'
+        VM-name: 'tested'
         vm-service-account-id: 'ajeaorne25djejr6ile9'
         vm-cores: 2
         vm-platform-id: 'standard-v2'
@@ -31,3 +31,4 @@ jobs:
         vm-core-fraction: 5
         vm-subnet-id: 'e9bu7ur6f08ojuln8q4e'
         docker-compose-path: './docker-compose.yaml'
+  
