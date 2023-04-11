@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  backend:
+    image: cr.yandex/crpgdibs74khufptbu4j@sha256:5eedaa1425daf0b639eb8510a06891eb92ec2280df1c277b9c6d7634bdce0147
+    ports:
+      - 3000:3000
+    restart: always
+
+  frontend:
+    image: cr.yandex/crpgdibs74khufptbu4j@sha256:577f0f3adee7920b957a4c7262c7a09207436e60edefe9212a337d683d7c5146
+    ports:
+      - 80:4200
+    restart: always
