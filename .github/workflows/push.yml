@@ -1,0 +1,59 @@
+name: Testing on 'push' 
+
+on:
+  pull_request:
+    types: [ synchronize, opened, reopened ]
+    branches:
+      - master
+  push:
+    branches:    
+        - '*'
+        - '!master'
+jobs:
+  Frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client/
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: './client/package-lock.json'
+      - name: install dependencies
+        run: npm ci
+      - name: install dependencies
+        run: npm ci
+      - name: run lint
+        run: npm run lint
+      - name: run test
+        run: npm run test:prod
+  Backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend/
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: './backend/package-lock.json'
+      - name: install dependencies
+        run: npm ci
+      - name: run lint
+        run: npm run lint
+      - name: run test
+        run: npm run test

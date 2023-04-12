@@ -1,8 +1,9 @@
-name: ci/cd
-
+name: Testing and Deploy
 on:
-  push:
-    branches: ['master']
+  pull_request:
+    types: [ closed ]
+    branches:
+      - master
 env:
   CR_REGISTRY: crpgdibs74khufptbu4j
   IMAGE_TAG_FRONTEND: frontend-${{ github.sha }}
@@ -61,25 +62,6 @@ jobs:
       - name: run test
         run: npm run test
 
-  # ClearRegistry:
-  #   needs: [Backend, Frontend]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: executing remote ssh commands using ssh
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         host: "51.250.2.164"
-  #         username: "yc-user"
-  #         key: ${{ secrets.SSH_KEY }}
-  #         script: |
-  #           whoami
-  #           curl -H Metadata-Flavor:Google 169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token | \
-  #           cut -f1 -d',' | \
-  #           cut -f2 -d':' | \
-  #           tr -d '"' | \
-  #           sudo docker login --username iam --password-stdin cr.yandex
-  #           sudo docker rmi cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
-  #           sudo docker rmi cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
   Build:
     needs: [Backend, Frontend]
     runs-on: ubuntu-latest
