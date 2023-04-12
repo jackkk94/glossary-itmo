@@ -1,7 +1,7 @@
 name: Testing and Deploy
 on:
   pull_request:
-    types: [ closed ]
+    types: [closed]
     branches:
       - master
 env:
@@ -9,6 +9,9 @@ env:
   IMAGE_TAG_FRONTEND: frontend-${{ github.sha }}
   IMAGE_TAG_BACKEND: backend-${{ github.sha }}
   SSH_KEY: ${{ secrets.SSH_KEY }}
+  YC_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+  YC_IMAGE_BACKEND: cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
+  YC_IMAGE_FRONTEND: cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
 
 jobs:
   Frontend:
@@ -45,7 +48,6 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -61,28 +63,27 @@ jobs:
         run: npm run lint
       - name: run test
         run: npm run test
-
+        
   Build:
     needs: [Backend, Frontend]
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Yandex Cloud CR "Login"
         uses: yc-actions/yc-cr-login@v0.1-alpha
         with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          yc-sa-json-credentials: ${{ env.YC_CREDENTIALS }}
       - name: Build, tag, and push backend image to Yandex Cloud Container Registry
         working-directory: ./backend/
         run: |
-          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}} .
-          docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
+          docker build -t ${{env.YC_IMAGE_BACKEND}} .
+          docker push ${{env.YC_IMAGE_BACKEND}}
 
       - name: Build, tag, and push frontend image to Yandex Cloud Container Registry
         working-directory: ./client/
         run: |
-          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}} .
-          docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
+          docker build -t ${{env.YC_IMAGE_FRONTEND}} .
+          docker push ${{env.YC_IMAGE_FRONTEND}}
 
   Deploy:
     needs: [Build]
