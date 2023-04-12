@@ -16,7 +16,12 @@ env:
   YC_SUBNET_ID: e9bu7ur6f08ojuln8q4e
 
 jobs:
+  Is-merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
   Frontend-tests:
+    needs: Is-merged
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -43,6 +48,7 @@ jobs:
         run: npm run test:prod
 
   Backend-tests:
+    needs: Is-merged
     runs-on: ubuntu-latest
     defaults:
       run:
