@@ -68,8 +68,8 @@ jobs:
       - name: executing remote ssh commands using ssh
         uses: appleboy/ssh-action@master
         with:
-          host: 51.250.2.164
-          username: "jack"
+          host: '51.250.2.164'
+          username: "yc-user"
           key: ${{ secrets.SSH_KEY }}
           script: | 
             whoami
