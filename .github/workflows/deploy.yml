@@ -117,4 +117,3 @@ jobs:
           vm-subnet-id: ${{ env.YC_SUBNET_ID }}
           docker-compose-path: './docker-compose.yaml'
           user-data-path: './user-data.yaml'
-
