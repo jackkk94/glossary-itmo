@@ -67,7 +67,7 @@ jobs:
         run: npm run test
 
   Build:
-    needs: [Backend, Frontend]
+    needs: [Backend-tests, Frontend-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
