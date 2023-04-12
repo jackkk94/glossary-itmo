@@ -10,8 +10,10 @@ env:
   IMAGE_TAG_BACKEND: backend-${{ github.sha }}
   SSH_KEY: ${{ secrets.SSH_KEY }}
   YC_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-  YC_IMAGE_BACKEND: cr.yandex/${{CR_REGISTRY}}:${{IMAGE_TAG_BACKEND}}
-  YC_IMAGE_FRONTEND: cr.yandex/${{CR_REGISTRY}}:${{IMAGE_TAG_BACKEND}}
+  YC_FOLDER_ID: b1g9u079h6hri0udbrmt
+  YC_VM_NAME: glossary
+  YC_SEVICE_ACCOUNT_ID: ajeaorne25djejr6ile9
+  YC_SUBNET_ID: e9bu7ur6f08ojuln8q4e
 
 jobs:
   Frontend:
@@ -48,6 +50,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
+
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -67,6 +70,7 @@ jobs:
   Build:
     needs: [Backend, Frontend]
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
       - name: Yandex Cloud CR "Login"
@@ -76,14 +80,14 @@ jobs:
       - name: Build, tag, and push backend image to Yandex Cloud Container Registry
         working-directory: ./backend/
         run: |
-          docker build -t ${{env.YC_IMAGE_BACKEND}} .
-          docker push ${{env.YC_IMAGE_BACKEND}}
+          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}} .
+          docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
 
       - name: Build, tag, and push frontend image to Yandex Cloud Container Registry
         working-directory: ./client/
         run: |
-          docker build -t ${{env.YC_IMAGE_FRONTEND}} .
-          docker push ${{env.YC_IMAGE_FRONTEND}}
+          docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}} .
+          docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
 
   Deploy:
     needs: [Build]
@@ -96,15 +100,15 @@ jobs:
         id: deploy-coi
         uses: yc-actions/yc-coi-deploy@v1.0.1
         with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-          folder-id: 'b1g9u079h6hri0udbrmt'
-          VM-name: 'glossary'
-          vm-service-account-id: 'ajeaorne25djejr6ile9'
+          yc-sa-json-credentials: ${{ env.YC_CREDENTIALS }}
+          folder-id: ${{ env.YC_FOLDER_ID }}
+          VM-name: ${{ env.YC_VM_NAME }}
+          vm-service-account-id: ${{ env.YC_SEVICE_ACCOUNT_ID }}
           vm-cores: 2
           vm-platform-id: 'standard-v2'
           vm-memory: 2Gb
           vm-disk-size: 30Gb
           vm-core-fraction: 100
-          vm-subnet-id: 'e9bu7ur6f08ojuln8q4e'
+          vm-subnet-id: ${{ env.YC_SUBNET_ID }}
           docker-compose-path: './docker-compose.yaml'
           user-data-path: './user-data.yaml'
