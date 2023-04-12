@@ -78,8 +78,8 @@ jobs:
             cut -f2 -d':' | \
             tr -d '"' | \
             sudo docker login --username iam --password-stdin cr.yandex 
-            sudo docker rmi -f cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
-            sudo docker rmi -f cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
+            sudo docker rmi cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
+            sudo docker rmi cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
   Build:
     needs: [ClearRegistry]
     runs-on: ubuntu-latest
