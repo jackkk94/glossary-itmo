@@ -97,7 +97,7 @@ jobs:
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         folder-id: 'b1g9u079h6hri0udbrmt'
-        VM-name: 'glossary-new'
+        VM-name: 'glossary'
         vm-service-account-id: 'ajeaorne25djejr6ile9'
         vm-cores: 2
         vm-platform-id: 'standard-v2'
