@@ -16,7 +16,7 @@ env:
   YC_SUBNET_ID: e9bu7ur6f08ojuln8q4e
 
 jobs:
-  Frontend:
+  Frontend-tests:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -42,7 +42,7 @@ jobs:
       - name: run test
         run: npm run test:prod
 
-  Backend:
+  Backend-tests:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -50,7 +50,6 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -70,7 +69,6 @@ jobs:
   Build:
     needs: [Backend, Frontend]
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Yandex Cloud CR "Login"
@@ -95,7 +93,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Deploy COI VM
         id: deploy-coi
         uses: yc-actions/yc-coi-deploy@v1.0.1
