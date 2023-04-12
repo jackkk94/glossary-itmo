@@ -1,13 +1,13 @@
 version: "3.7"
 services:
   backend:
-    image: cr.yandex/crpgdibs74khufptbu4j:backend
+    image: cr.yandex/crpgdibs74khufptbu4j:{{ env.IMAGE_TAG_BACKEND }}
     ports:
       - 3000:3000
     restart: always
 
   frontend:
-    image: cr.yandex/crpgdibs74khufptbu4j:frontend
+    image: cr.yandex/crpgdibs74khufptbu4j:{{ env.IMAGE_TAG_FRONTEND }}
     ports:
       - 80:4200
     restart: always
