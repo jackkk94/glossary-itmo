@@ -17,18 +17,12 @@ env:
   YC_SUBNET_ID: e9bu7ur6f08ojuln8q4e
 
 jobs:
-  Is-merged:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "pr is merged"
-
   Tests:
-    needs: Is-merged
+    if: github.event.pull_request.merged == true
     uses: ./.github/workflows/push.yml
 
   Build:
-    needs: [Backend-tests, Frontend-tests]
+    needs: [Tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
