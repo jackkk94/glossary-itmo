@@ -4,6 +4,7 @@ on:
     types: [closed]
     branches:
       - master
+  workflow_call:
 env:
   CR_REGISTRY: crpgdibs74khufptbu4j
   IMAGE_TAG_FRONTEND: frontend-${{ github.sha }}
