@@ -15,6 +15,7 @@ env:
   YC_SEVICE_ACCOUNT_ID: ajeaorne25djejr6ile9
   YC_SUBNET_ID: e9bu7ur6f08ojuln8q4e
 
+
 jobs:
   Frontend:
     runs-on: ubuntu-latest
