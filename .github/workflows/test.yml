@@ -74,15 +74,16 @@ jobs:
       - name: Build, tag, and push backend image to Yandex Cloud Container Registry
         working-directory: ./backend/
         run: |
+          docker rmi cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
           docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}} .
           docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_BACKEND}}
 
       - name: Build, tag, and push frontend image to Yandex Cloud Container Registry
         working-directory: ./client/
         run: |
+          docker rmi cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
           docker build -t cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}} .
           docker push cr.yandex/${{env.CR_REGISTRY}}:${{env.IMAGE_TAG_FRONTEND}}
-
 
   Deploy:
     needs: [Build]
