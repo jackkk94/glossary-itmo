@@ -70,7 +70,7 @@ jobs:
         with:
           host: '51.250.2.164'
           username: "yc-user"
-          key: {{ env.SSH_KEY }}
+          key: ${{ env.SSH_KEY }}
           script: | 
             whoami
             curl -H Metadata-Flavor:Google 169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token | \
