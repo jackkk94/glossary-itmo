@@ -62,7 +62,7 @@ jobs:
   #     run: npm run test 
 
   ClearRegistry:
-    needs: [Backend, Frontend]
+    # needs: [Backend, Frontend]
     runs-on: ubuntu-latest
     steps:
       - name: executing remote ssh commands using ssh
